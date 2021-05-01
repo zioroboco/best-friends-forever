@@ -1,4 +1,4 @@
-import { setupBff } from "@zioroboco/bff"
+import { setupBff } from "@zioroboco/bff/lib/runtime"
 
 export const { api, handler } = setupBff()
 

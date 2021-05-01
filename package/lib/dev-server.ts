@@ -1,4 +1,4 @@
-import { invoke } from "@zioroboco/bff"
+import { invoke } from "./invoke"
 import { watch } from "chokidar"
 import type { Configuration } from "webpack-dev-server"
 

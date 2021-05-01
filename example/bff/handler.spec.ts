@@ -1,5 +1,5 @@
 import { handler } from "./handler"
-import { invoke } from "@zioroboco/bff"
+import { invoke } from "@zioroboco/bff/lib/invoke"
 
 it("works", async () => {
   const response = await invoke({ handler, event: { path: "/hello" } })

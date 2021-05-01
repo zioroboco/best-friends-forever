@@ -1,5 +1,5 @@
 import { resolve } from "path"
-import { setupDevServer } from "@zioroboco/bff"
+import { setupDevServer } from "@zioroboco/bff/lib/dev-server"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import webpack from "webpack"
 
