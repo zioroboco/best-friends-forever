@@ -1,0 +1,12 @@
+*
+
+# Whitelist...
+!**/
+!*.ts
+!*.js
+!*.json
+!*.yaml
+
+# Explicitly ignore...
+**/node_modules/
+**/dist

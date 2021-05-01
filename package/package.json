@@ -1,0 +1,15 @@
+{
+  "name": "@zioroboco/bff",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "author": "Louis Quinnell <_@ziorobo.co>",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/zioroboco/bff.git",
+    "directory": "package"
+  },
+  "main": "lib",
+  "scripts": {
+    "compile": "tsc --project ../package"
+  }
+}

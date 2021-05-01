@@ -1,5 +1,31 @@
 {
   "private": true,
-  "workspaces": [],
-  "scripts": {}
+  "workspaces": [
+    "package"
+  ],
+  "scripts": {
+    "test": "jest",
+    "compile": "yarn -s workspaces run compile",
+    "lint": "eslint . --ext .ts && prettier --check '**/*'",
+    "lint:fix": "eslint . --ext .ts --fix && prettier --write '**/*'"
+  },
+  "resolutions": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-only-warn": "^1.0.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.2.4"
+  }
 }
