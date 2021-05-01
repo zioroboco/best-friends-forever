@@ -8,16 +8,20 @@ type Argv = {
 }
 
 const config = (env: any, { mode }: Argv): webpack.Configuration => {
-  let { BFF_SERVICE, BFF_VERSION } = process.env
+  let { BFF_NAME, BFF_VERSION } = process.env
 
-  if (mode === "production" && (!BFF_SERVICE || !BFF_VERSION)) {
-    throw new Error("Required BFF environment variables were missing")
+  if (mode === "production" && (!BFF_NAME || !BFF_VERSION)) {
+    throw new Error(
+      `Required BFF environment variables were missing:
+        BFF_NAME: ${BFF_NAME}
+        BFF_VERSION: ${BFF_VERSION}`
+    )
   }
 
-  BFF_SERVICE = BFF_SERVICE ?? "service"
+  BFF_NAME = BFF_NAME ?? "name"
   BFF_VERSION = BFF_VERSION ?? "version"
 
-  const BFF_PREFIX = `/bff/${BFF_SERVICE}/${BFF_VERSION}`
+  const BFF_PREFIX = `/bff/${BFF_NAME}/${BFF_VERSION}`
 
   return {
     devServer:
@@ -30,7 +34,7 @@ const config = (env: any, { mode }: Argv): webpack.Configuration => {
 
     plugins: [
       new webpack.DefinePlugin({
-        BFF_SERVICE: JSON.stringify(BFF_SERVICE),
+        BFF_NAME: JSON.stringify(BFF_NAME),
         BFF_VERSION: JSON.stringify(BFF_VERSION),
         BFF_PREFIX: JSON.stringify(BFF_PREFIX),
       }),
