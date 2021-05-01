@@ -5,12 +5,16 @@
     "package"
   ],
   "scripts": {
+    "start": "yarn -s workspace @zioroboco/bff-example start",
+    "build": "yarn -s workspace @zioroboco/bff-example build",
     "test": "jest",
     "compile": "yarn -s workspaces run compile",
     "lint": "eslint . --ext .ts && prettier --check '**/*'",
     "lint:fix": "eslint . --ext .ts --fix && prettier --write '**/*'"
   },
   "resolutions": {
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^3.11.3",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.1"
   },

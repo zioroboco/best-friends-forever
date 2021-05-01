@@ -3,9 +3,21 @@
   "version": "0.0.0-private",
   "private": true,
   "scripts": {
-    "compile": "cd .. && tsc --project example"
+    "build": "webpack --mode=production",
+    "start": "webpack serve --mode=development",
+    "compile": "cd .. && tsc --project example && tsc --project example/app"
   },
   "dependencies": {
     "@zioroboco/bff": "*"
+  },
+  "devDependencies": {
+    "@types/html-webpack-plugin": "^3.2.5",
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^3.11.3",
+    "html-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.1.1",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }

@@ -1,3 +1,4 @@
 {
-  "extends": "@zioroboco/bff/tsconfig.json"
+  "extends": "@zioroboco/bff/tsconfig.json",
+  "include": ["bff", "webpack.config"]
 }
