@@ -1,5 +1,9 @@
-const root = document.querySelector("#root")
+const node = document.querySelector("#output")
 
-if (root) {
-  root.innerHTML = "<h1>👋</h1>"
+if (node) {
+  fetch("/bff/service/version/hello").then(response => {
+    response.json().then(data => {
+      node.textContent = JSON.stringify(data)
+    })
+  })
 }
