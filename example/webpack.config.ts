@@ -1,43 +1,15 @@
-import { invoke } from "@zioroboco/bff"
 import { resolve } from "path"
-import { watch } from "chokidar"
+import { setupDevServer } from "@zioroboco/bff"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import webpack from "webpack"
 
-const prefix = "/bff/service/version"
-
-let handler = require("./bff/handler").handler
-
-watch("./bff/handler.ts").on("all", (event, path) => {
-  delete require.cache[require.resolve("./bff/handler")]
-  handler = require("./bff/handler").handler
+const devServer = setupDevServer({
+  handler: require.resolve("./bff/handler"),
+  prefix: "/bff/service/version",
 })
 
 const config: webpack.Configuration = {
-  devServer: {
-    before: (app, server, compiler) => {
-      app.all(`${prefix}/*`, async (req, res) => {
-        const bffResponse = await invoke({
-          handler,
-          event: {
-            httpMethod: req.method,
-            path: req.path.replace(prefix, ""),
-            body: req.body,
-          },
-        })
-
-        res.statusCode = bffResponse.statusCode
-
-        res.write(
-          bffResponse.isBase64Encoded
-            ? Buffer.from(bffResponse.body, "base64")
-            : bffResponse.body
-        )
-
-        res.end()
-      })
-    },
-  },
+  devServer,
   output: {
     path: resolve(__dirname, "build/app"),
   },
