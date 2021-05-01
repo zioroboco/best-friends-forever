@@ -4,6 +4,8 @@ import { watch } from "chokidar"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import webpack from "webpack"
 
+const prefix = "/bff/service/version"
+
 let handler = require("./bff/handler").handler
 
 watch("./bff/handler.ts").on("all", (event, path) => {
@@ -14,8 +16,15 @@ watch("./bff/handler.ts").on("all", (event, path) => {
 const config: webpack.Configuration = {
   devServer: {
     before: (app, server, compiler) => {
-      app.all("/hello", async (req, res) => {
-        const bffResponse = await invoke({ handler, event: { path: req.path } })
+      app.all(`${prefix}/*`, async (req, res) => {
+        const bffResponse = await invoke({
+          handler,
+          event: {
+            httpMethod: req.method,
+            path: req.path.replace(prefix, ""),
+            body: req.body,
+          },
+        })
 
         res.statusCode = bffResponse.statusCode
 
