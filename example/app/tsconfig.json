@@ -1,0 +1,7 @@
+{
+  "extends": "@zioroboco/bff/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2020", "dom"],
+    "jsx": "react"
+  }
+}
