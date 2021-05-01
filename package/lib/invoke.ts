@@ -4,7 +4,7 @@ type InvokeOptions = {
   /** The BFF handler function. */
   handler: Handler
   /** The api-gateway event with which the BFF will be invoked. */
-  event: Partial<Event>
+  event: Partial<Event> & Pick<Event, "path">
 }
 
 /** Invoke the passed BFF handler function in the current node process. */
