@@ -1,2 +1,3 @@
 import { BuildCommand } from "./build.command"
-export default [BuildCommand]
+import { DeployCommand } from "./deploy.command"
+export default [BuildCommand, DeployCommand]

@@ -12,9 +12,9 @@ const config = (env: any, { mode }: Argv): webpack.Configuration => {
 
   if (mode === "production" && (!BFF_NAME || !BFF_VERSION)) {
     throw new Error(
-      `Required BFF environment variables were missing:
-        BFF_NAME: ${BFF_NAME}
-        BFF_VERSION: ${BFF_VERSION}`
+      `Required BFF environment variables were missing:\n` +
+        `\tBFF_NAME: ${BFF_NAME}` +
+        `\tBFF_VERSION: ${BFF_VERSION}`
     )
   }
 
