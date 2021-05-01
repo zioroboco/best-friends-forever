@@ -1,4 +1,5 @@
 import { default as createLambdaApi } from "lambda-api"
+import { stripVersion } from "./util"
 import type { Handler } from "./types"
 
 /**
@@ -25,11 +26,4 @@ export const setupBff = () => {
   }
 
   return { api, handler }
-}
-
-/**
- * Strip BFF version from an incoming path (i.e. `/v1/path` -> `/path`).
- */
-const stripVersion = (path: string) => {
-  return path.replace(/^\/[^\/]+/, "")
 }
