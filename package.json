@@ -1,10 +1,11 @@
 {
   "private": true,
   "workspaces": [
+    "example",
     "package"
   ],
   "scripts": {
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "compile": "yarn -s workspaces run compile",
     "lint": "eslint . --ext .ts && prettier --check '**/*'",
     "lint:fix": "eslint . --ext .ts --fix && prettier --write '**/*'"

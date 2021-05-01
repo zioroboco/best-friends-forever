@@ -1,0 +1,11 @@
+{
+  "name": "@zioroboco/bff-example",
+  "version": "0.0.0-private",
+  "private": true,
+  "scripts": {
+    "compile": "cd .. && tsc --project example"
+  },
+  "dependencies": {
+    "@zioroboco/bff": "*"
+  }
+}

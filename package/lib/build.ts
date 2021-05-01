@@ -17,6 +17,7 @@ export async function build(options: Options) {
     entryPoints: [options.handler],
     outfile: resolve(options.taskdir, "index.js"),
     bundle: true,
+    external: ["aws-sdk"],
     sourcemap: "external",
     platform: "node",
     target: "node14",
