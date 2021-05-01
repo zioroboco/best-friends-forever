@@ -1,5 +1,5 @@
 import { stubVersion } from "./util"
-import type { Context, Event, Handler, Result } from "./types"
+import type { Context, Event, Handler, Result } from "@zioroboco/bff/types"
 
 type InvokeOptions = {
   /** The BFF handler function. */

@@ -7,47 +7,65 @@ type Argv = {
   mode: "production" | "development" | "none"
 }
 
-const config = (env: any, { mode }: Argv): webpack.Configuration => ({
-  devServer:
-    mode !== "production"
-      ? setupDevServer({
-          handler: require.resolve("./bff/handler"),
-          prefix: "/bff/service/version",
-        })
-      : {},
+const config = (env: any, { mode }: Argv): webpack.Configuration => {
+  let { BFF_SERVICE, BFF_VERSION } = process.env
 
-  output: {
-    path: resolve(__dirname, "build/app"),
-  },
+  if (mode === "production" && (!BFF_SERVICE || !BFF_VERSION)) {
+    throw new Error("Required BFF environment variables were missing")
+  }
 
-  entry: ["./app"],
+  BFF_SERVICE = BFF_SERVICE ?? "service"
+  BFF_VERSION = BFF_VERSION ?? "version"
 
-  resolve: {
-    extensions: [".ts", ".js", ".json"],
-  },
+  const BFF_PREFIX = `/bff/${BFF_SERVICE}/${BFF_VERSION}`
 
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              configFile: resolve(__dirname, "app/tsconfig.json"),
-              transpileOnly: true,
-            },
-          },
-        ],
-      },
+  return {
+    devServer:
+      mode !== "production"
+        ? setupDevServer({
+            handler: require.resolve("./bff/handler"),
+            prefix: BFF_PREFIX,
+          })
+        : {},
+
+    plugins: [
+      new webpack.DefinePlugin({
+        BFF_SERVICE: JSON.stringify(BFF_SERVICE),
+        BFF_VERSION: JSON.stringify(BFF_VERSION),
+        BFF_PREFIX: JSON.stringify(BFF_PREFIX),
+      }),
+      new HtmlWebpackPlugin({
+        template: "./app/index.html",
+      }),
     ],
-  },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./app/index.html",
-    }),
-  ],
-})
+    output: {
+      path: resolve(__dirname, "build/app"),
+    },
+
+    entry: ["./app"],
+
+    resolve: {
+      extensions: [".ts", ".js", ".json"],
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: [
+            {
+              loader: "ts-loader",
+              options: {
+                configFile: resolve(__dirname, "app/tsconfig.json"),
+                transpileOnly: true,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  }
+}
 
 export default config

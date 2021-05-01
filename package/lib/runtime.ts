@@ -1,6 +1,6 @@
 import { default as createLambdaApi } from "lambda-api"
 import { stripVersion } from "./util"
-import type { Handler } from "./types"
+import type { Handler } from "@zioroboco/bff/types"
 
 /**
  * Create an express-like API for defining BFF endpoints, and a handler
