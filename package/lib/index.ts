@@ -1,1 +1,1 @@
-export const thing: boolean = true
+export { build } from "./build"

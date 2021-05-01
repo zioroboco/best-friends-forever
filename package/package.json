@@ -11,5 +11,9 @@
   "main": "lib",
   "scripts": {
     "compile": "tsc --project ../package"
+  },
+  "dependencies": {
+    "@types/node": "^15.0.1",
+    "esbuild": "^0.11.16"
   }
 }
