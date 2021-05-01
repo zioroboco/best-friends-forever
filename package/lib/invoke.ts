@@ -1,4 +1,4 @@
-import type { Event, Handler, Result } from "./types"
+import type { Context, Event, Handler, Result } from "./types"
 
 type InvokeOptions = {
   /** The BFF handler function. */
@@ -9,5 +9,8 @@ type InvokeOptions = {
 
 /** Invoke the passed BFF handler function in the current node process. */
 export async function invoke(options: InvokeOptions): Promise<Result> {
-  return options.handler(options.event as Event) as Promise<Result>
+  return options.handler(
+    options.event as Event,
+    {} as Context
+  ) as Promise<Result>
 }
