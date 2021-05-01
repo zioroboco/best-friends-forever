@@ -3,7 +3,9 @@
   "version": "0.0.0-private",
   "private": true,
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "yarn -s build:bff && yarn -s build:app",
+    "build:app": "webpack --mode=production",
+    "build:bff": "bff build ./bff/handler ./build/bff",
     "start": "webpack serve --mode=development",
     "compile": "cd .. && tsc --project example && tsc --project example/app"
   },

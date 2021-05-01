@@ -1,5 +1,5 @@
 import { Command, Option } from "clipanion"
-import { build } from "@zioroboco/bff"
+import { build } from "@zioroboco/bff/lib/build"
 
 export class BuildCommand extends Command {
   static paths = [["build"]]
