@@ -9,11 +9,19 @@
     "directory": "package"
   },
   "main": "lib",
+  "bin": {
+    "bff": "bin/bff.js"
+  },
   "scripts": {
     "compile": "tsc --project ../package"
   },
+  "peerDependencies": {
+    "typescript": "^4.2.4"
+  },
   "dependencies": {
     "@types/node": "^15.0.1",
-    "esbuild": "^0.11.16"
+    "clipanion": "^3.0.0-rc.12",
+    "esbuild": "^0.11.16",
+    "ts-node": "^9.1.1"
   }
 }
