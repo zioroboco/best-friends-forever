@@ -5,8 +5,9 @@ import * as integrations from "@aws-cdk/aws-apigatewayv2-integrations"
 import * as lambda from "@aws-cdk/aws-lambda"
 
 type BffStackProps = cdk.StackProps & {
-  bffName: string
-  bffVersion: string
+  project: string
+  service: string
+  version: string
   taskdir: string
 }
 
@@ -26,7 +27,7 @@ export class BffStack extends cdk.Stack {
 
     const versionFunction = new lambda.Function(
       this,
-      `VersionFunction${props.bffVersion}`,
+      `VersionFunction${props.version}`,
       {
         functionName: props.stackName,
         runtime: lambda.Runtime.NODEJS_14_X,
@@ -38,7 +39,7 @@ export class BffStack extends cdk.Stack {
 
     const versionFunctionVersion = new lambda.Version(
       this,
-      `VersionFunctionVersion${props.bffVersion}`,
+      `VersionFunctionVersion${props.version}`,
       {
         lambda: versionFunction,
       }
@@ -51,12 +52,12 @@ export class BffStack extends cdk.Stack {
 
     const versionRoute = new apigwv2.HttpRoute(
       this,
-      `VersionRoute${props.bffVersion}`,
+      `VersionRoute${props.version}`,
       {
         httpApi: api,
         integration: versionIntegration,
         routeKey: apigwv2.HttpRouteKey.with(
-          `/${props.bffVersion}/{proxy+}`,
+          `/${props.version}/{proxy+}`,
           apigwv2.HttpMethod.ANY
         ),
       }

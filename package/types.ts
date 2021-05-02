@@ -9,7 +9,7 @@ export type { Context, Event, Result }
 export type Handler = (event: Event, context: Context) => Promise<Result>
 
 declare global {
-  var BFF_NAME: string
+  var BFF_SERVICE: string
   var BFF_VERSION: string
   var BFF_PREFIX: string
 }

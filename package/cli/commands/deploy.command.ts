@@ -1,6 +1,5 @@
-import { App } from "@aws-cdk/core"
-import { BffStack } from "@zioroboco/bff/lib/stack"
-import { Command, Option } from "clipanion"
+import { Command, Option, UsageError } from "clipanion"
+import { deploy } from "@zioroboco/bff/lib/deploy"
 
 export class DeployCommand extends Command {
   static paths = [["deploy"]]
@@ -9,31 +8,32 @@ export class DeployCommand extends Command {
     description: "Deploy a bundled BFF version.",
   }
 
-  name = Option.String()
-  version = Option.String()
   taskdir = Option.String()
+  project = Option.String("--project")
+  service = Option.String("--service")
+  version = Option.String("--version")
 
   async execute() {
-    let { BFF_PROJECT, BFF_NAME, BFF_VERSION } = process.env
+    let { BFF_PROJECT, BFF_SERVICE, BFF_VERSION } = process.env
 
-    if (!BFF_PROJECT || !BFF_NAME || !BFF_VERSION) {
-      throw new Error(
-        `Required BFF environment variables were missing:\n` +
-          `\tBFF_PROJECT: ${BFF_PROJECT}` +
-          `\tBFF_NAME: ${BFF_NAME}` +
-          `\tBFF_VERSION: ${BFF_VERSION}`
+    this.project = this.project ?? BFF_PROJECT
+    this.service = this.service ?? BFF_SERVICE
+    this.version = this.version ?? BFF_VERSION
+
+    if (!this.project || !this.service || !this.version) {
+      throw new UsageError(
+        `Required BFF configuration was missing:
+          BFF_PROJECT: ${this.project}
+          BFF_SERVICE: ${this.service}
+          BFF_VERSION: ${this.version}`
       )
     }
 
-    const stackName = `${BFF_PROJECT}-bff-${BFF_NAME}`
-
-    const app = new App()
-
-    new BffStack(app, stackName, {
-      stackName,
-      bffName: BFF_NAME,
-      bffVersion: BFF_VERSION,
+    deploy({
       taskdir: this.taskdir,
+      project: this.project,
+      service: this.service,
+      version: this.version,
     })
   }
 }
