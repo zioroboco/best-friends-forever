@@ -10,7 +10,7 @@
   },
   "main": "lib",
   "bin": {
-    "bff": "bin/bff.js"
+    "bff": "bin/cli.js"
   },
   "scripts": {
     "compile": "tsc --project ../package"
