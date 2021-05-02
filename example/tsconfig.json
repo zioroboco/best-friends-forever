@@ -1,8 +1,8 @@
 {
   "extends": "@zioroboco/bff/tsconfig.json",
   "files": [
-    "node_modules/jest-playwright-preset/types/global.d.ts",
-    "node_modules/expect-playwright/global.d.ts"
+    "../node_modules/jest-playwright-preset/types/global.d.ts",
+    "../node_modules/expect-playwright/global.d.ts"
   ],
   "include": ["bff", "spec", "webpack.config.ts"]
 }
