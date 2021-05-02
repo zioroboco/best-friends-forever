@@ -7,6 +7,7 @@
     "build:app": "webpack --mode=production",
     "build:bff": "bff build ./bff/handler ./build/bff",
     "start": "webpack serve --mode=development",
+    "test": "start-server-and-test 'yarn -s start --port=5555' http://localhost:5555 'PORT=5555 jest'",
     "compile": "cd .. && tsc --project example && tsc --project example/app"
   },
   "dependencies": {
@@ -16,7 +17,12 @@
     "@types/html-webpack-plugin": "^3.2.5",
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.3",
+    "expect-playwright": "^0.3.4",
     "html-webpack-plugin": "^5.3.1",
+    "jest-playwright": "^0.0.1",
+    "jest-playwright-preset": "^1.5.2",
+    "playwright": "^1.10.0",
+    "start-server-and-test": "^1.12.1",
     "ts-loader": "^9.1.1",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.5.0",
