@@ -5,9 +5,15 @@
     "package"
   ],
   "scripts": {
-    "start": "yarn -s workspace @zioroboco/bff-example start",
-    "build": "yarn -s workspace @zioroboco/bff-example build",
-    "test": "jest",
+    "example": "yarn -s workspace @zioroboco/bff-example",
+    "package": "yarn -s workspace @zioroboco/bff",
+    "start": "yarn -s example start",
+    "build": "yarn -s example build",
+    "test": "yarn -s test:package && yarn -s test:example",
+    "test:ci": "yarn -s test:package --ci && yarn -s test:example --ci",
+    "test:example": "yarn -s example test",
+    "test:package": "yarn -s package test",
+    "test:e2e": "start-server-and-test 'yarn -s start --port=5555' http://localhost:5555 'PORT=5555 jest --ci --config example/jest.e2e.config.js'",
     "compile": "yarn -s workspaces run compile",
     "lint": "eslint . --ext .ts && prettier --check '**/*'",
     "lint:fix": "eslint . --ext .ts --fix && prettier --write '**/*'"

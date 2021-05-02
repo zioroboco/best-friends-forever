@@ -7,7 +7,8 @@
     "build:app": "webpack --mode=production",
     "build:bff": "bff build ./bff/handler ./build/bff",
     "start": "webpack serve --mode=development",
-    "test": "start-server-and-test 'yarn -s start --port=5555' http://localhost:5555 'PORT=5555 jest'",
+    "test": "cd .. && yarn -s jest --config example/jest.config.js",
+    "test:e2e": "cd .. && yarn -s test:e2e",
     "compile": "cd .. && tsc --project example && tsc --project example/app"
   },
   "dependencies": {

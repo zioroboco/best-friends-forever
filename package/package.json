@@ -13,7 +13,8 @@
     "bff": "bin/cli.js"
   },
   "scripts": {
-    "compile": "tsc --project ../package"
+    "test": "cd .. && jest --config package/jest.config.js",
+    "compile": "cd .. && tsc --project package"
   },
   "peerDependencies": {
     "typescript": "^4.2.4"

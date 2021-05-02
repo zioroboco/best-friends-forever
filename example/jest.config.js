@@ -1,10 +1,4 @@
-const base = require("@zioroboco/bff/jest.config")
-
 module.exports = {
-  ...base,
-  preset: "jest-playwright-preset",
-  transform: {
-    ...base.transform,
-    "\\.ts$": "ts-jest",
-  },
+  ...require("@zioroboco/bff/jest.config"),
+  testPathIgnorePatterns: ["e2e"],
 }
