@@ -6,7 +6,7 @@ beforeAll(async () => {
     const response = await invoke({
       handler,
       event: {
-        // FIXME: having to do weird stuff to deal with different route formats
+        // TODO: Extract a test helper for invoking BFFs
         path: `/${route.request().url().split("/").pop()}`,
         httpMethod: route.request().method(),
         body: route.request().postData(),

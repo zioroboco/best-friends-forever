@@ -1,0 +1,15 @@
+name: chores
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: alstr/todo-to-issue-action@v3.0.2-beta
+        with:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
