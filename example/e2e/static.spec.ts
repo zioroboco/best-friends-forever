@@ -2,11 +2,12 @@ beforeAll(async () => {
   await page.route("**/bff/**", route =>
     route.fulfill({
       status: 200,
-      body: JSON.stringify({ message: "Hello splorld!" }),
+      body: JSON.stringify({ message: "Hello static mock!" }),
     })
   )
 
   await page.goto(`http://localhost:${process.env.PORT ?? 8080}`)
+  await page.waitForLoadState("networkidle")
 })
 
 afterAll(async () => {
@@ -14,5 +15,5 @@ afterAll(async () => {
 })
 
 it(`loads the stubbed data`, async () => {
-  expect(await page.content()).toContain("Hello splorld!")
+  expect(await page.content()).toContain("Hello static mock!")
 })

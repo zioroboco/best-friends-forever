@@ -1,17 +1,18 @@
-import { fetch } from "cross-fetch"
+import "cross-fetch"
+import "cross-fetch/polyfill"
 import { setupBff } from "@zioroboco/bff/lib/runtime"
 
 export const { api, handler } = setupBff()
 
 api.get("/hello", async (req, res) => {
-  const { json: response } = await fetch("https://httpbin.org/anything", {
+  const { json: data } = await fetch("https://httpbin.org/anything", {
     method: "POST",
     body: JSON.stringify({ name: "world" }),
-  }).then(data => data.json())
+  }).then(response => response.json())
 
   return {
-    message: response?.name
-      ? `Hello ${response.name}!`
+    message: data?.name
+      ? `Hello ${data.name}!`
       : "Something went wrong, but that's okay! ❤️",
   }
 })

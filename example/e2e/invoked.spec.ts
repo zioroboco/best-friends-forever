@@ -1,7 +1,12 @@
 import { handler } from "../bff/handler"
 import { invoke } from "@zioroboco/bff/lib/invoke"
+import fetchMock from "fetch-mock-jest"
 
 beforeAll(async () => {
+  fetchMock.post("https://httpbin.org/anything", {
+    json: { name: "BFF" },
+  })
+
   await page.route("**/bff/**", async route => {
     const response = await invoke({
       handler,
@@ -19,12 +24,14 @@ beforeAll(async () => {
   })
 
   await page.goto(`http://localhost:${process.env.PORT ?? 8080}`)
+  await page.waitForLoadState("networkidle")
 })
 
 afterAll(async () => {
   await browser.close()
+  fetchMock.restore()
 })
 
 it(`loads the stubbed data`, async () => {
-  expect(await page.content()).toContain("Hello world!")
+  expect(await page.content()).toContain("Hello BFF!")
 })
