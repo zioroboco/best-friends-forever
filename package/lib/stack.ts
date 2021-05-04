@@ -63,7 +63,7 @@ export class BffStack extends cdk.Stack {
       }
     )
 
-    const toRetain = [versionFunction, versionFunctionVersion, versionRoute]
+    const toRetain = [versionFunctionVersion, versionRoute]
     toRetain.forEach(construct => {
       cdk.Aspects.of(construct).add(new RemovalPolicyAspect())
     })
