@@ -27,11 +27,11 @@ beforeAll(async () => {
   await page.waitForLoadState("networkidle")
 })
 
+it(`loads the stubbed data`, async () => {
+  expect(await page.content()).toContain("Hello BFF!")
+})
+
 afterAll(async () => {
   await browser.close()
   fetchMock.restore()
-})
-
-it(`loads the stubbed data`, async () => {
-  expect(await page.content()).toContain("Hello BFF!")
 })

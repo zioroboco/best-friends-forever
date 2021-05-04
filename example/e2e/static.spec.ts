@@ -10,10 +10,10 @@ beforeAll(async () => {
   await page.waitForLoadState("networkidle")
 })
 
-afterAll(async () => {
-  await browser.close()
-})
-
 it(`loads the stubbed data`, async () => {
   expect(await page.content()).toContain("Hello static mock!")
+})
+
+afterAll(async () => {
+  await browser.close()
 })

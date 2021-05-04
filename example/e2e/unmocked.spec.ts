@@ -3,10 +3,10 @@ beforeAll(async () => {
   await page.waitForLoadState("networkidle")
 })
 
-afterAll(async () => {
-  await browser.close()
-})
-
 it(`loads the expected data from the BFF`, async () => {
   expect(await page.content()).toContain("Hello world!")
+})
+
+afterAll(async () => {
+  await browser.close()
 })
