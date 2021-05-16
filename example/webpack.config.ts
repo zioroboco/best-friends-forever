@@ -24,22 +24,16 @@ const config = (env: any, { mode }: Argv): webpack.Configuration => {
   global.BFF_SERVICE = BFF_SERVICE
   global.BFF_VERSION = BFF_VERSION
 
-  const BFF_PREFIX = `/bff/${BFF_SERVICE}/${BFF_VERSION}`
-
   return {
     devServer:
       mode !== "production"
-        ? setupDevServer({
-            handler: require.resolve("./bff/handler"),
-            prefix: BFF_PREFIX,
-          })
+        ? setupDevServer({ handler: require.resolve("./bff/handler") })
         : {},
 
     plugins: [
       new webpack.DefinePlugin({
         BFF_SERVICE: JSON.stringify(BFF_SERVICE),
         BFF_VERSION: JSON.stringify(BFF_VERSION),
-        BFF_PREFIX: JSON.stringify(BFF_PREFIX),
       }),
       new HtmlWebpackPlugin({
         template: "./app/index.html",

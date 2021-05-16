@@ -1,8 +1,9 @@
+import { endpoint } from "./types"
 import { invoke } from "./invoke"
 import { watch } from "chokidar"
 import type { Configuration } from "webpack-dev-server"
 
-type Options = { handler: string; prefix: string }
+type Options = { handler: string }
 
 export function setupDevServer(options: Options): Configuration {
   let handler = require(options.handler).handler
@@ -14,12 +15,12 @@ export function setupDevServer(options: Options): Configuration {
 
   return {
     before: (app, server, compiler) => {
-      app.all(`${options.prefix}/*`, async (req, res) => {
+      app.all(endpoint("/*"), async (req, res) => {
         const bffResponse = await invoke({
           handler,
           event: {
             httpMethod: req.method,
-            path: req.path.replace(options.prefix, ""),
+            path: req.url.replace(`/bff/${BFF_SERVICE}`, ""),
             body: req.body,
           },
         })

@@ -1,9 +1,9 @@
-import "@zioroboco/bff/types"
+import { endpoint } from "@zioroboco/bff"
 
 const node = document.querySelector("#output")
 
 if (node) {
-  fetch(`${BFF_PREFIX}/hello`).then(response => {
+  fetch(endpoint("/hello")).then(response => {
     response.json().then(data => {
       node.textContent = JSON.stringify(data)
     })

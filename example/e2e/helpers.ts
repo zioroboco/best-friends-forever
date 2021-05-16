@@ -1,6 +1,6 @@
-import { Handler } from "@zioroboco/bff/types"
 import { Route } from "playwright"
 import { invoke } from "@zioroboco/bff/lib/invoke"
+import type { Handler } from "@zioroboco/bff"
 
 export const routeWithHandler = (handler: Handler) => async (route: Route) => {
   const result = await invoke({

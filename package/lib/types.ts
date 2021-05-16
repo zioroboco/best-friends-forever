@@ -11,5 +11,7 @@ export type Handler = (event: Event, context: Context) => Promise<Result>
 declare global {
   var BFF_SERVICE: string
   var BFF_VERSION: string
-  var BFF_PREFIX: string
 }
+
+export const endpoint = (endpoint: `/${string}`) =>
+  `/bff/${BFF_SERVICE}/${BFF_VERSION}` + endpoint

@@ -1,6 +1,6 @@
-import { Handler } from "@zioroboco/bff/types"
 import { fetch } from "cross-fetch"
 import createApi from "lambda-api"
+import type { Handler } from "@zioroboco/bff"
 
 type Dependencies = { fetch: typeof fetch }
 

@@ -1,4 +1,4 @@
-import type { Context, Event, Handler, Result } from "@zioroboco/bff/types"
+import type { Context, Event, Handler, Result } from "./types"
 
 type InvokeOptions = {
   /** The BFF handler function. */
