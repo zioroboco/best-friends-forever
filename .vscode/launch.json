@@ -21,7 +21,7 @@
       "args": ["--runInBand"],
       "console": "internalConsole",
       "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/jest*/**"],
       "disableOptimisticBPs": true
     },
     {
@@ -32,7 +32,7 @@
       "args": ["${fileBasenameNoExtension}", "--config", "jest.config.js"],
       "console": "internalConsole",
       "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/jest*/**"],
       "disableOptimisticBPs": true
     }
   ]
