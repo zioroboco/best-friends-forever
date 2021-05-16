@@ -3,11 +3,15 @@ import { setupDevServer } from "@zioroboco/bff/lib/dev-server"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import webpack from "webpack"
 
+type Env = {
+  scenario?: string
+}
+
 type Argv = {
   mode: "production" | "development" | "none"
 }
 
-const config = (env: any, { mode }: Argv): webpack.Configuration => {
+const config = ({ scenario }: Env, { mode }: Argv): webpack.Configuration => {
   let { BFF_SERVICE, BFF_VERSION } = process.env
 
   if (mode === "production" && (!BFF_SERVICE || !BFF_VERSION)) {
@@ -27,7 +31,10 @@ const config = (env: any, { mode }: Argv): webpack.Configuration => {
   return {
     devServer:
       mode !== "production"
-        ? setupDevServer({ handler: require.resolve("./bff/handler") })
+        ? setupDevServer({
+            handler: require.resolve("./bff/handler"),
+            scenario,
+          })
         : {},
 
     plugins: [

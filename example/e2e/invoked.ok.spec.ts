@@ -11,7 +11,7 @@ beforeAll(async () => {
 })
 
 it(`renders the expected data`, async () => {
-  expect(await page.content()).toContain("Hello Scenario!")
+  expect(await page.content()).toContain("Hello scenario!")
 })
 
 afterAll(async () => {

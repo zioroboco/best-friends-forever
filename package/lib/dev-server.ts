@@ -1,16 +1,30 @@
-import { endpoint } from "./types"
+import { Handler, endpoint } from "./types"
 import { invoke } from "./invoke"
+import { resolve } from "path"
 import { watch } from "chokidar"
 import type { Configuration } from "webpack-dev-server"
 
-type Options = { handler: string }
+type Options = {
+  handler: string
+  scenario?: string
+}
+
+const setupHandler = ({ handler, scenario }: Options): Handler => {
+  const handlerModule = require(handler) as { init: any; handler: Handler }
+  return scenario
+    ? handlerModule.init({
+        // TODO: Get paths to scenarios from config
+        fetch: require(resolve(handler, "../../scenarios", scenario)).default(),
+      })
+    : handlerModule.handler
+}
 
 export function setupDevServer(options: Options): Configuration {
-  let handler = require(options.handler).handler
+  let handler = setupHandler(options)
 
   watch(options.handler).on("all", (event, path) => {
     delete require.cache[require.resolve(options.handler)]
-    handler = require(options.handler).handler
+    handler = setupHandler(options)
   })
 
   return {
