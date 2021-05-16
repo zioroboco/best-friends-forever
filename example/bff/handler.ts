@@ -1,26 +1,35 @@
 import { fetch } from "cross-fetch"
-import createApi from "lambda-api"
-import type { Handler } from "@zioroboco/bff"
+import Koa from "koa"
+import Router from "koa-router"
+import serverless from "serverless-http"
 
 type Dependencies = { fetch: typeof fetch }
 
-export const init = ({ fetch }: Dependencies): Handler => {
-  const api = createApi({ base: BFF_VERSION })
+export const init = ({ fetch }: Dependencies) => {
+  const app = new Koa()
+  const router = new Router({
+    prefix: BFF_VERSION ? `/${BFF_VERSION}` : undefined,
+  })
 
-  api.get("/hello", async (req, res) => {
+  router.get("/hello", async (ctx, next) => {
     const { json: data } = await fetch("https://httpbin.org/anything", {
       method: "POST",
       body: JSON.stringify({ name: "world" }),
     }).then(response => response.json())
 
-    return {
+    ctx.body = {
       message: data?.name
         ? `Hello ${data.name}!`
         : "Something went wrong, but that's okay! ❤️",
     }
+
+    return next()
   })
 
-  return (event, context) => api.run(event, context)
+  app.use(router.routes())
+  app.use(router.allowedMethods())
+
+  return serverless(app)
 }
 
 export const handler = init({ fetch })

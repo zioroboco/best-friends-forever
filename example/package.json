@@ -14,11 +14,15 @@
   "dependencies": {
     "@zioroboco/bff": "*",
     "cross-fetch": "^3.1.4",
-    "lambda-api": "^0.10.7"
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0",
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
     "@types/fetch-mock": "^7.3.3",
     "@types/html-webpack-plugin": "^3.2.5",
+    "@types/koa": "^2.13.1",
+    "@types/koa-router": "^7.4.2",
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.3",
     "expect-playwright": "^0.3.4",
