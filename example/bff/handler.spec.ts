@@ -1,6 +1,6 @@
 import * as handler from "./handler"
 import { invoke } from "@zioroboco/bff/lib/invoke"
-import { sandbox } from "fetch-mock-jest"
+import { sandbox } from "fetch-mock"
 
 it("works", async () => {
   const fetch = sandbox().post("https://httpbin.org/anything", {

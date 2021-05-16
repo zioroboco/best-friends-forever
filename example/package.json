@@ -23,7 +23,6 @@
     "@types/webpack-dev-server": "^3.11.3",
     "expect-playwright": "^0.3.4",
     "fetch-mock": "^9.11.0",
-    "fetch-mock-jest": "^1.5.1",
     "html-webpack-plugin": "^5.3.1",
     "jest-playwright": "^0.0.1",
     "jest-playwright-preset": "^1.5.2",
