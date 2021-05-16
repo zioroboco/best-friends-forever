@@ -25,13 +25,7 @@ export function setupDevServer(options: Options): Configuration {
         })
 
         res.statusCode = bffResponse.statusCode
-
-        res.write(
-          bffResponse.isBase64Encoded
-            ? Buffer.from(bffResponse.body, "base64")
-            : bffResponse.body
-        )
-
+        res.write(bffResponse.body)
         res.end()
       })
     },
