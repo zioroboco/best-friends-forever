@@ -1,4 +1,10 @@
+const base = require("@zioroboco/bff/jest.config")
+
 module.exports = {
-  ...require("@zioroboco/bff/jest.config"),
+  ...base,
+  globals: {
+    ...base.globals,
+    BFF_VERSION: undefined,
+  },
   testPathIgnorePatterns: ["e2e"],
 }

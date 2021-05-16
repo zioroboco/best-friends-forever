@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@zioroboco/bff": "*",
-    "cross-fetch": "^3.1.4"
+    "cross-fetch": "^3.1.4",
+    "lambda-api": "^0.10.7"
   },
   "devDependencies": {
     "@types/fetch-mock": "^7.3.3",

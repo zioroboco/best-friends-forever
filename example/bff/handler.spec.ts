@@ -1,18 +1,14 @@
-import { handler } from "./handler"
+import * as handler from "./handler"
 import { invoke } from "@zioroboco/bff/lib/invoke"
-import fetchMock from "fetch-mock-jest"
-
-afterAll(() => {
-  fetchMock.restore()
-})
+import { sandbox } from "fetch-mock-jest"
 
 it("works", async () => {
-  fetchMock.post("https://httpbin.org/anything", {
+  const fetch = sandbox().post("https://httpbin.org/anything", {
     json: { name: "BFF" },
   })
 
   const response = await invoke({
-    handler,
+    handler: handler.init({ fetch }),
     event: { path: "/hello" },
   })
 

@@ -18,8 +18,11 @@ const config = (env: any, { mode }: Argv): webpack.Configuration => {
     )
   }
 
-  BFF_SERVICE = BFF_SERVICE ?? "service"
-  BFF_VERSION = BFF_VERSION ?? "version"
+  BFF_SERVICE = BFF_SERVICE || "service"
+  BFF_VERSION = BFF_VERSION || "version"
+
+  global.BFF_SERVICE = BFF_SERVICE
+  global.BFF_VERSION = BFF_VERSION
 
   const BFF_PREFIX = `/bff/${BFF_SERVICE}/${BFF_VERSION}`
 
