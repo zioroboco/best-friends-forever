@@ -13,7 +13,7 @@
     "bff": "bin/cli.js"
   },
   "scripts": {
-    "test": "cd .. && jest --config package/jest.config.js",
+    "test": "cd .. && jest --passWithNoTests --config package/jest.config.js",
     "compile": "cd .. && tsc --project package"
   },
   "peerDependencies": {
